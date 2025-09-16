@@ -1,0 +1,54 @@
+@extends('layouts.contenido')
+@section('contenido')
+    <div class="container mt-5">
+        <!-- Botón para volver al inicio -->
+        <div class="mb-4">
+            <a class="btn btn-secondary fw-bold" href="{{ route('administracion') }}">
+                <i class="fas fa-arrow-left"></i>{{ __('idioma.Atras') }}
+            </a>
+        </div>
+
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center mb-4">Entrenadores</h2>
+
+            <a class="btn btn-primary btn-lg fw-bold mb-3" href="{{ route('entrenador.create') }}">
+                <i class="fas fa-plus"></i> Añadir entrenador
+            </a>
+
+            <div id="entrenoPersona">
+                <div id="nota">
+                    <table class="table table-striped table-hover text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Dirección</th>
+                                <th>{{ __('idioma.Acciones') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach ($entrenadores as $entrenador)
+                                    <tr>
+                                        <td>{{ $entrenador->nombre }}</td>
+                                        <td>{{ $entrenador->apellido }}</td>
+                                        <td>{{ $entrenador->email }}</td>
+                                        <td>{{ $entrenador->telefono }}</td>
+                                        <td>{{ $entrenador->direccion }}</td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm"
+                                                href="{{ route('entrenador.edit', $entrenador->id) }}">{{ __('idioma.Editar') }}</a>
+                                            <a class="btn btn-danger btn-sm"
+                                                href="{{ route('entrenador.destroy', $entrenador->id) }}">{{ __('idioma.Borrar') }}</a>
+                                        </td>
+                                    </tr>         
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
