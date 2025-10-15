@@ -33,7 +33,14 @@ class LoginController extends Controller
         // Devuelve el token y el tipo de token Bearer con el código de estado 200
         return response()->json([
             'accessToken'=>$token,
-            'token_type'=>'Bearer'
+            'token_type'=>'Bearer',
+            'user'=>[
+            'id'    => $user->id,
+            'id_plan' =>$user->id_plan,
+            'name'  => $user->name,
+            'email' => $user->email,
+            'rol'   => $user->rol, 
+            ]
         ],200);
     }
 }
