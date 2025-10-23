@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('entrenadores', EntrenadorApiController::class);
 
     Route::apiResource('entrenos', EntrenoApiController::class);
-    Route::apiResource('entrenos/getEntreno',EntrenoApiController::class);
+    Route::post('entrenos/getEntreno', [EntrenoApiController::class, 'getEntreno']);
 
     Route::apiResource('perfiles', PerfilApiController::class);
 
