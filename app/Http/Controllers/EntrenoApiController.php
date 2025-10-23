@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entreno;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EntrenoApiController extends Controller
@@ -16,6 +17,14 @@ class EntrenoApiController extends Controller
         return response()->json($entrenos, 200);
     }
 
+    /**
+     * Ver datos del los ejercicios del usuario que esta en la sesión
+     */
+    public function getEntreno(Request $request)
+    {
+        $userId = $request->user()->id; // usuario autenticado
+        return Entreno::where('id_user', $userId)->get();
+    }
     /**
      * Guardar el nuevo entreno
      */

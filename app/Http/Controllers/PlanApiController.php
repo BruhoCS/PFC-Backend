@@ -34,7 +34,7 @@ class PlanApiController extends Controller
     }
 
      /**
-     * Guardar el nuevo plan
+     * Buscar plan
      */
     public function update(Request $request,$id)
     {
