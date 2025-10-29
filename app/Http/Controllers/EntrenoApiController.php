@@ -31,7 +31,7 @@ class EntrenoApiController extends Controller
     public function store(Request $request)
     {
         //Validamos o valor introducido
-        $request->validate([
+        $data=$request->validate([
             "dia" => "required|in:Lunes,Martes,Miércoles,Jueves,Viernes,Sábado,Domingo",
             "grupo_muscular" => "required|in:Tren Superior,Tren Inferior,Core",
             "ejercicio" => "required|string",
@@ -41,10 +41,17 @@ class EntrenoApiController extends Controller
             "descanso" => "nullable|string"
         ]);
 
+        $data['id_user'] = $request->user()->id;
+
+        // 3) Crear con datos validados
+        $entreno = Entreno::create($data);
+
+        return response()->json($entreno, 201);
+        /*
         //Obxeto de entreno
         $entreno = Entreno::create($request->all());
         //Rediriximos ao usuario a táboa de entrenos
-        return response()->json($entreno, 201);
+        return response()->json($entreno, 201);*/
     }
 
     /**
