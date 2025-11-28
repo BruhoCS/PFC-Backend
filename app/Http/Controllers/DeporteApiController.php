@@ -82,7 +82,7 @@ class DeporteApiController extends Controller
     //Funcion destroy para la API
     public function destroy($id)
     {
-        //Buscamos el pokemon
+        //Buscamos el deporte
         $deporte = Deporte::find($id);
 
         //Si no existe indicamos al usaurio
@@ -90,7 +90,7 @@ class DeporteApiController extends Controller
             return response()->json(['error' => "No se encontró el deporte"], 404);
         }
 
-        //Si existe borramos el pokemon
+        //Si existe borramos el deporte
         $deporte->delete();
 
         return response()->json(['message' => 'Deporte borrado exitosamente'], 200);

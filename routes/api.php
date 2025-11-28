@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeporteApiController;
+use App\Http\Controllers\DeporteUserApiController;
 use App\Http\Controllers\EntrenadorApiController;
 use App\Http\Controllers\EntrenoApiController;
 use App\Http\Controllers\LoginController;
@@ -27,14 +28,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('loginAPI', [LoginController::class, 'loginAPI']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    //Deportes
     Route::apiResource('deportes', DeporteApiController::class);
 
+    //Tabla pivote deportes usuarios
+    Route::post('/deportes/{deporte}/apuntarse', [DeporteUserApiController::class, 'apuntarse']);
+    Route::delete('/deportes/{deporte}/borrarse', [DeporteUserApiController::class, 'borrarse']);
+    Route::get('/perfil/deportes', [DeporteUserApiController::class, 'misDeportes']);
+
+    //Entrenadores
     Route::apiResource('entrenadores', EntrenadorApiController::class);
 
+    //Entrenos
     Route::apiResource('entrenos', EntrenoApiController::class);
     Route::post('entrenos/getEntreno', [EntrenoApiController::class, 'getEntreno']);
 
+    //Perfil del usuario
     Route::apiResource('perfiles', PerfilApiController::class);
 
+    //Planes del gimansio
     Route::apiResource('planes', PlanApiController::class);
 });
