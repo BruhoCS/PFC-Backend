@@ -37,10 +37,10 @@ class PerfilApiController extends Controller
             "hobby" => "required|string|min:1|max:100",
         ]);
 
-       
+
         //Objeto de usuario
         $user = User::create($request->all());
-         //Obxeto de perfil
+        //Obxeto de perfil
         $perfil = Perfil::create($request->all());
         //Lo devolvemos como un JSON
         return response()->json([$perfil, $user], 201);
@@ -91,5 +91,26 @@ class PerfilApiController extends Controller
         //Si existe borramos el perfil
         $perfil->delete();
         return response()->json(['message' => 'perfil borrado exitosamente'], 200);
+    }
+
+    /**
+     * Apuntarse al plan
+     */
+
+    public function apuntarsePlan(Request $request)
+    {
+        $request->validate([
+            'plan_id' => 'required|exists:planes,id'
+        ]);
+
+        $user = $request->user();   // usuario autenticado por Sanctum
+
+        $user->id_plan = $request->plan_id;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Plan asignado correctamente',
+            'user' => $user
+        ], 200);
     }
 }

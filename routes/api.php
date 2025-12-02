@@ -7,6 +7,8 @@ use App\Http\Controllers\EntrenoApiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PerfilApiController;
 use App\Http\Controllers\PlanApiController;
+use App\Http\Controllers\userApiController;
+use App\Models\Perfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,9 +45,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('entrenos', EntrenoApiController::class);
     Route::post('entrenos/getEntreno', [EntrenoApiController::class, 'getEntreno']);
 
+    //Usuario
+    Route::post('/usuario/{plan}/apuntarsePlan', [UserApiController::class, 'apuntarsePlan']);
+
     //Perfil del usuario
     Route::apiResource('perfiles', PerfilApiController::class);
 
     //Planes del gimansio
     Route::apiResource('planes', PlanApiController::class);
+    
 });
