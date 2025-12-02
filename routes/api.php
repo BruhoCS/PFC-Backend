@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Perfil del usuario
     Route::apiResource('perfiles', PerfilApiController::class);
+    Route::get('/perfil/{id_user}', [PerfilApiController::class, 'mostrarPerfil']);
 
     //Planes del gimansio
     Route::apiResource('planes', PlanApiController::class);

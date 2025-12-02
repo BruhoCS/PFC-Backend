@@ -94,23 +94,17 @@ class PerfilApiController extends Controller
     }
 
     /**
-     * Apuntarse al plan
+     * Mostrar perfil del usuario
      */
 
-    public function apuntarsePlan(Request $request)
-    {
-        $request->validate([
-            'plan_id' => 'required|exists:planes,id'
-        ]);
-
-        $user = $request->user();   // usuario autenticado por Sanctum
-
-        $user->id_plan = $request->plan_id;
-        $user->save();
-
-        return response()->json([
-            'message' => 'Plan asignado correctamente',
-            'user' => $user
-        ], 200);
+    public function mostrarPerfil($id_user){
+        //Buscamos el perfil segun el id del user
+        $perfil = Perfil::where('id_user', $id_user)->first();
+        //Si no existe indicamos al usaurio
+        if (!$perfil) {
+            return response()->json(['error' => "No se encontró el Perfil"], 404);
+        }
+        //Si existe devolvemos el perfil del usuario
+        return response()->json($perfil,200);
     }
 }
