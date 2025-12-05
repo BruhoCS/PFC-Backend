@@ -38,7 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Tabla pivote deportes usuarios
     Route::post('/deportes/{deporte}/apuntarse', [DeporteUserApiController::class, 'apuntarse']);
+    //Ruta para que el usuario de desapunte del deporte
     Route::delete('/deportes/{deporte}/borrarse', [DeporteUserApiController::class, 'borrarse']);
+    //Ruta para que cada usuario vea a los deportes que está inscrito
     Route::get('/perfil/deportes', [DeporteUserApiController::class, 'misDeportes']);
 
     //Entrenadores
