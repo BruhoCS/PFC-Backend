@@ -28,6 +28,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('loginAPI', [LoginController::class, 'loginAPI']);
+//Registrer publico para que nuevos usuarios puedan crear su cuenta
+Route::post('/register', [UserApiController::class, 'store']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     //Deportes
@@ -46,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('entrenos/getEntreno', [EntrenoApiController::class, 'getEntreno']);
 
     //Usuario
+    Route::apiResource('usuarios',userApiController::class);
     Route::post('/usuario/{plan}/apuntarsePlan', [UserApiController::class, 'apuntarsePlan']);
 
     //Perfil del usuario
